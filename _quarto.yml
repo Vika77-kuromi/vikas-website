@@ -1,0 +1,33 @@
+project:
+  type: website
+  resources:
+    - ProfilePic.jpg
+
+website:
+  title: "Vika's Personal Website"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: DS/DataScience.qmd
+        text: Data Science Project
+      - href: ws/writing.qmd
+        text: Writing
+        
+  sidebar:
+    - title: "Data Science Project"
+      style: docked
+      background: light
+      contents:
+        - DS/HW4.qmd
+        - DS/ds3_showcase_Vika.mp4
+        - DS/
+
+format:
+  html: 
+    theme: yeti
+    css: styles.css
+    toc: true
+
+editor: visual
+

@@ -1,0 +1,14 @@
+# Data Science Projects
+
+Here are some of my featured data science projects:
+
+## Passenger Air Travel On-Time Report
+
+Discover insights into air travel delays and airline performance. This project analyzes on-time performance metrics to uncover key trends in the aviation industry.
+
+- [Read the Full Report](HW4.qmd)
+
+## Reddit Users' Attitudes on Anti-Obesity Drugs and Potential Access Issues
+This data science project uses Reddit discussion data to analyze users’ attitudes and perceptions toward anti-obesity medications for weight management. A range of data techniques is applied, and policy implications are explored to identify gaps between users' needs and current healthcare offerings.
+
+- [Watch the Full Video and Read More](ds3_showcase_Vika.qmd)

@@ -1,0 +1,14 @@
+---
+title: "Vika's Personal Website"
+---
+<div class="profile-section">
+  <img src="ProfilePic.jpg" alt="My Profile Picture" class="profile-pic">
+  <div class="intro-text">
+
+Hi, welcome to Vika's personal page! I'm currently pursuing a Master’s degree in **Data Science for Public Policy** at Georgetown University and actively seeking a full-time position in the United States starting June 2025.
+
+Before graduate school, I earned my bachelor's degree in **Psychology and Education** from New York University and gained 1.5 years of experience as a research assistant in a developmental psychology program. My passion for **life sciences** and the **healthcare industry** has shaped my academic and professional journey.
+
+Throughout my graduate studies, I’ve focused on **health policy** and the application of **machine learning techniques** in disease diagnosis. Currently, I serve as a Policy Analyst, Data Analyst, and Website Manager at the Healthcare Financing Initiative at Georgetown University. Additionally, I’ve gained industry experience through internships at Siemens Healthineers, various startups as a Marketing and Product Intern, and soon, I’ll be joining the Government Affairs Team at Elanco’s DC office.
+
+Please explore the different sections of my website to learn more about my work. In my free time, I enjoy reading, cooking, and video editing.

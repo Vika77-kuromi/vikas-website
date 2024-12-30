@@ -1,0 +1,37 @@
+---
+title: "Reddit Users' Attitudes on Anti-Obesity Drugs"
+format: html
+---
+
+### Summary:
+
+This data science project uses Reddit discussion data to analyze users’ attitudes and perceptions toward anti-obesity medications for weight management. A range of data techniques is applied, and policy implications are explored to identify gaps between users' needs and current healthcare offerings.
+
+### Data Source:
+
+This study uses Reddit data to assess users' attitudes toward anti-obesity drugs and the challenges they encounter, such as high costs, limited access, and insurance issues. Data is collected via the Reddit API from 21 popular subreddits related to health and weight management, including loseit, obesity, AskDocs, nutrition, PCOS, diabetes, and fitness, among others. Queries include keywords such as “weight loss,” “health,” “Medicare,” and specific anti-obesity drugs, like Semaglutide.
+
+For each subreddit, I query these keywords to extract relevant discussions. The results are stored in a data frame containing post titles, main text, comment counts, upvote/downvote scores, URL links, all comments, and subreddit names. To ensure diversity, I set a limit of 200 posts per query, although some subreddits do not reach this cap. In total, 3,800 posts and their associated comments are collected.
+
+After removing duplicates and null values, the dataset contains 1,543 entries. On average, each post has 184 comments (standard deviation: 242) and a score of 788 (standard deviation: 1,753), indicating significant variance in engagement levels. Outliers, calculated based on the Interquartile Range (IQR), are removed for better consistency.
+
+Since my research focuses on individual perspectives, I apply the expand function to the comment column, allowing each comment to form its own row. After this transformation, the dataset contains 26,014 rows.
+
+### Video:
+
+<video controls width="640">
+
+<source src="ds3_showcase_Vika.mp4" type="video/mp4">
+
+Your browser does not support the video tag. You can [download the video](ds3_showcase_Vika.mp4) instead. </video>
+
+### Findings and Limitations:
+
+In summary, users exhibit a generally positive attitude across the dataset, but sentiments vary significantly across topic clusters and entities. Government healthcare programs like Medicare and Medicaid are viewed favorably, which suggests an opportunity for policymakers to expand coverage to include weight-loss drugs, a measure already proposed by the Biden administration. Under current Medicare Part D regulations, individuals with pre-existing conditions like diabetes can access these medications, but obese individuals must often wait until a serious health condition develops to qualify for coverage. This delay not only harms patients but also increases long-term costs for insurance companies, as treating more severe health conditions, often exacerbated by obesity, becomes significantly more expensive. Moreover, some studies suggest that pressure on Medicare and Medicaid to cover anti-obesity drugs could encourage private insurance companies to assume greater responsibility for similar coverage.
+
+One limitation is that TF-IDF prioritizes term importance based on frequency and uniqueness but does not capture relationships between terms. In contrast, association rule mining focuses on co-occurrences, which may underrepresent standalone frequent terms like “insurance”. This gap limits a comprehensive understanding of term significance. As a next step, introducing bigrams and trigrams could help uncover more meaningful patterns and relationships between terms.
+
+Reddit discussions may not fully represent broader populations due to self-selection bias and the platform's demographics. Additionally, discussions about insurance and healthcare costs might be underreported due to their sensitivity. To address this issue, scraping data from other parts of the Internet and incorporating multiple social platforms for data collection could provide a broader and more balanced dataset.
+
+\
+\

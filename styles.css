@@ -1,0 +1,22 @@
+/* css styles */
+.profile-section {
+  display: flex;          /* Align the image and text side by side */
+  gap: 30px;              /* Add spacing between the image and text */
+  align-items: flex-start; /* Align items at the top */
+  margin: 20px auto;      /* Add vertical spacing and center the section */
+  max-width: 800px;       /* Limit the section width */
+}
+
+.profile-pic {
+  flex-shrink: 0;         /* Prevent the image from shrinking */
+  width: 300px;           /* Make the image larger */
+  height: auto;           /* Maintain aspect ratio */
+  border-radius: 8px;     /* Optional: Add rounded corners */
+}
+
+.intro-text {
+  flex: 1;                /* Allow text to take the remaining space */
+  line-height: 1.6;       /* Improve line spacing for readability */
+  text-align: left;       /* Align text to the left */
+}
+

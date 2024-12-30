@@ -1,0 +1,49 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Vika's Personal Website\"\n",
+        "---\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "# Welcome to My Website\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "```{markdown}\n",
+        "<div class=\"profile-section\">\n",
+        "  <img src=\"ProfilePic.jpg\" alt=\"My Profile Picture\" class=\"profile-pic\">\n",
+        "  <div class=\"intro-text\">\n",
+        "    Hi, welcome to Vika's personal page! I'm currently pursuing a Master’s degree in Data Science for Public Policy at Georgetown University and actively seeking a full-time position in the United States starting June 2025.\n",
+        "\n",
+        "    Before graduate school, I earned my bachelor's degree in Psychology and Education from New York University and gained 1.5 years of experience as a research assistant in a developmental psychology program. My passion for life sciences and the healthcare industry has shaped my academic and professional journey.\n",
+        "\n",
+        "    Throughout my graduate studies, I’ve focused on health policy and the application of machine learning techniques in disease diagnosis. Currently, I serve as a Policy Analyst, Data Analyst, and Website Manager at the Healthcare Financing Initiative at Georgetown University. Additionally, I’ve gained industry experience through internships at Siemens Healthineers, various startups as a Marketing and Product Intern, and soon, I’ll be joining the Government Affairs Team at Elanco’s DC office.\n",
+        "\n",
+        "    Please explore the different sections of my website to learn more about my work. In my free time, I enjoy reading, cooking, and video editing.\n",
+        "  </div>\n",
+        "</div>\n",
+        "\n",
+        "\n",
+        "```"
+      ],
+      "id": "28191c0b"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "display_name": "Python 3",
+      "language": "python",
+      "name": "python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

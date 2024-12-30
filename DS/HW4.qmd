@@ -1,0 +1,423 @@
+---
+title: "Passenger Air Travel On-time Insight Report"
+output: html_document
+author: Vika Li
+geometry: "left=3cm,right=3cm,top=2cm,bottom=2cm"
+date: Dec 06, 2024
+---
+
+## Introduction
+
+Air travel has revolutionized transportation, enabling people to traverse vast distances with unprecedented speed and efficiency. In just a few hours, travelers can move from the bustling streets of New York City to sunny Los Angeles, fostering global connectivity and economic integration. However, air travel is not always as pleasant as it expects to be. Delays, cancellations, and even plane crashes all happen by some chances, causing schedule disruptives for travelers and reduced airline performances.
+
+Therefore, in this report, using selected data from the Bureau of Transportation Statistics, I aim to examine key metrics in assessing the dynamics of aviation industry, focusing on:
+
+-   Early and Delay Departure: Analyzing the max delays and early departure times for each airline.
+
+-   Cancellation: Looking into key reasons for flight cancellations in most airports in the US.
+
+-   Flight Trends: Assessing total flight volumes by day of the week in July 2020.
+
+```{r, include=FALSE}
+max_delay <- read.csv('/Users/vikali/Desktop/sqlclass/Assignment/Miniproject/HW4_Vika_Li_jl2991__Problem1_results.csv')
+max_early <-read.csv('/Users/vikali/Desktop/sqlclass/Assignment/Miniproject/HW4_Vika_Li_jl2991__Problem2_results.csv')
+busy_day <-read.csv('/Users/vikali/Desktop/sqlclass/Assignment/Miniproject/HW4_Vika_Li_jl2991__Problem3_results.csv')
+highest_delay<-read.csv('/Users/vikali/Desktop/sqlclass/Assignment/Miniproject/HW4_Vika_Li_jl2991__Problem4_results.csv')
+airline_airport_delay <-read.csv('/Users/vikali/Desktop/sqlclass/Assignment/Miniproject/HW4_Vika_Li_jl2991__Problem5_results.csv')
+cancel<-read.csv('/Users/vikali/Desktop/sqlclass/Assignment/Miniproject/HW4_Vika_Li_jl2991__Problem6a_results.csv')
+cancel_reason<-read.csv('/Users/vikali/Desktop/sqlclass/Assignment/Miniproject/HW4_Vika_Li_jl2991__Problem6b_results.csv')
+number_of_flight <-read.csv('/Users/vikali/Desktop/sqlclass/Assignment/Miniproject/HW4_Vika_Li_jl2991__Problem7_results.csv')
+airport_code <- read.csv('/Users/vikali/Desktop/sqlclass/Assignment/Miniproject/Dimensiontables/L_AIRPORT.csv')
+```
+
+## **Data Description and Method**
+
+The dataset used in the analysis is retrieved from the Reporting Carrier On-Time Performance datafile under the passenger travel subject from the Bureau of Transportation website. July 2020 is being selected as the focusing month of the analysis. With 352888 rows of data, the dataset contains detailed information across the following categories:
+
+-   Time Information: Year, quarter, month, day of month, day of week, flight date.
+
+-   Airline Information: Airline carrier code, airline US DOT code, airline IATA code, tail number, flight number.
+
+-   Origin Airport Information: Origin airport ID, origin airport name, origin airport city name, origin airport state code,and other details.
+
+-   Destination Airport Information: Destination airport ID, destination airport name, destination airport city name, destination airport state code, and other details.
+
+-   Departure Performance Information: Planned departure time, actual departure time, differences in planned and actual departure time, departure delay indicator, and other details.
+
+-   Arrival Performance Information: Planned arrival time, actual arrival time, differences in planned and actual arrival time, and other details.
+
+-   Cancellation Information: Cancelled flight indicator, cancellation code.
+
+**Airline information**, **departure performance**, and **cancellations** are the key metrics in assessing the performance of airlines. The dataset is imported to **MySQL** for data grouping, querying, and filtering to enable efficient analysis. Subsequently, **R** is used for data visualizations, employing techniques such as geospatial mapping and descriptive plots.
+
+## **Early and Delay Departure**
+
+```{r, include=FALSE}
+library(tidyr)
+library(dplyr)
+airline_dep <- merge(max_delay, max_early,by='Reporting_Airline')
+airline_dep_long <-airline_dep %>%
+  pivot_longer(
+    col=c(MaxDepartureDelay,max_earlydep),
+    names_to='Type',
+    values_to='Minutes')
+
+airline_dep_long$Reporting_Airline <- factor(airline_dep_long$Reporting_Airline,
+                                             levels = airline_dep_long %>%
+                                               filter(Type=='MaxDepartureDelay') %>%
+                                               arrange(desc(Minutes)) %>%
+                                               pull(Reporting_Airline))
+
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+par(mfrow = c(1, 2))
+library(ggplot2)
+airline_depature <- ggplot(airline_dep_long, aes(x = Reporting_Airline, y = Minutes, fill = Type)) +
+  geom_bar(stat = "identity", position = "stack") +
+  scale_fill_manual(values = c("MaxDepartureDelay" = "#4DAF4A", "max_earlydep" = "#E41A1C"),
+                    labels = c("Max Early Departure","Max Late Departure")) +
+  theme_classic() +
+  labs(title = "Plot 1:Maximum Early and Late Depature Delays by Airline",
+       subtitle='Comparing late depatures and early depatures',
+       x = "Airline",
+       y = "Delay (Minutes)",
+       fill = "Type of Delay") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))+
+  geom_text(aes(label = Minutes), color = "white", position = position_stack(vjust = 0.5), size = 2)
+airline_depature
+```
+
+```{r, include=FALSE}
+ggsave(filename = "airline_depature.png", 
+       plot = airline_depature, 
+       path = "/Users/vikali/Desktop/sqlclass/Assignment/Miniproject", 
+       scale = 1, 
+       dpi = 300)
+
+```
+
+Plot 1 illustrates the maximum early and late departure delays for 17 airlines, with late departures represented in green and early departures in red. The plot highlights notable disparities regarding punctuality on airline performance.
+
+There are two outliers, American Airlines(AA) and American Eagle Airlines (MQ). AA exhibits the worst performance on late departures, with a maximum delay of 3890 minutes, and also shows the one of the highest early departures, reaching 60 minutes. MQ ranks second on the chart with the maximum late departure of 2248 minutes. For the remaining of the 15 airlines, they are well within the 500 to 1500 minute range for late departures and have negligible early departures. Hawaii Airlines (HA) is the best airline in terms of punctuality. 
+
+Airlines with extreme delay instances should investigate the root causes. Addressing outliers can significantly improve the overall airline performance and customer satisfactions. While plot 1 yields actionable insights, the analysis could be largely complemented by examining average early and delayed departures by minutes for each airline, which may offer a more comprehensive picture of the on-time performance.
+
+```{r, include=FALSE}
+cor_value <- cor(airline_dep$MaxDepartureDelay, airline_dep$max_earlydep, method = "pearson")
+ggplot(airline_dep, aes(x = MaxDepartureDelay, y = max_earlydep)) +
+  geom_point(color = "#4DAF4A", size = 3, alpha = 0.7) +
+  geom_smooth(method = "lm", color = "#E41A1C", se = TRUE) +
+  labs(title = "Correlation between Max Late and Early Departures",
+       x = "Maximum Late Departure (Minutes)",
+       y = "Maximum Early Departure (Minutes)") +
+  theme_classic()+
+  annotate("text", x = 3000, y = 70, label = paste("r =", round(cor_value, 2)), color = "blue")
+
+
+```
+
+## **Cancellation by Reasons and Regions**
+
+```{r, include=FALSE}
+airport_code <- airport_code %>%
+  mutate(City_State = sapply(strsplit(Name,":"),`[`, 1)) %>%
+  separate(City_State, into =c("City","State"),sep=",",remove=FALSE)
+
+airport_cancel_data <- cancel_reason %>%
+  left_join(airport_code, by = c("airport_name" = "Code"))
+
+```
+
+```{r, include=FALSE}
+library(ggmap)
+register_google(key = "AIzaSyBVPypDm5Tp2LL3SObUB9t7dPgE9kIXoio")
+
+# Geocode each city
+airport_cancel_data <- airport_cancel_data %>%
+  mutate(Full_Location = paste(City, State, sep = ", ")) %>%
+  mutate_geocode(Full_Location, output = "latlon", source = "google")
+
+```
+
+```{r, include=FALSE}
+library(ggplot2)
+library(dplyr)
+library(ggrepel)
+library(maps)
+
+
+usa_map <- map_data("state")
+
+pr_data <- airport_cancel_data %>% filter(State == "PR")
+
+# Main map (continental US)
+map_plot <- ggplot() +
+  geom_polygon(data = usa_map, aes(x = long, y = lat, group = group), fill = "gray95", color = "gray70") +
+  geom_point(data = airport_cancel_data %>% filter(State != "PR"), 
+             aes(x = lon, y = lat, color = most_frequent_reason), alpha = 0.8) +
+  scale_color_manual(
+    values = c("A" = "#E41A1C", "B" = "#377EB8", "C" = "#4DAF4A", "D" = "#984EA3"),
+    labels = c(
+      "A: Carrier", 
+      "B: Weather", 
+      "C: National Air System", 
+      "D: Security"
+    )
+  ) +
+  coord_fixed(xlim = c(-125, -60), ylim = c(20, 50)) +
+  theme_classic() +
+  theme(
+    axis.title = element_blank(),
+    axis.text = element_blank(),
+    axis.ticks = element_blank()
+  ) +
+  labs(
+    title = "Plot 2: Cancellation Reasons by Airport",
+    subtitle = "Colored by the most frequent reason",
+    color = "Cancellation Reason"
+  )
+```
+
+```{r, include=FALSE}
+airport_cancel_data <- airport_cancel_data %>%
+  mutate(State = trimws(State))
+
+# Define regions as a named vector
+region_mapping <- list(
+  "Northeast" = c("NY", "NJ", "MA", "PA", "CT", "RI", "VT", "NH", "ME",'DC','MD','DE','VA','WV'),
+  "Midwest" = c("IL", "OH", "MI", "IN", "WI", "MN", "IA", "MO", "ND", "SD", "NE", "KS"),
+  "South" = c("TX", "FL", "GA", "NC", "SC", "KY", "TN", "AL", "MS", "LA", "AR", "OK"),
+  "West" = c("CA", "WA", "OR", "NV", "AZ", "UT", "CO", "NM", "ID", "MT", "WY", "AK", "HI")
+)
+
+# Add a 'region' column to the data
+airport_cancel_data <- airport_cancel_data %>%
+  mutate(region = case_when(
+    State %in% region_mapping[["Northeast"]] ~ "Northeast",
+    State %in% region_mapping[["Midwest"]] ~ "Midwest",
+    State %in% region_mapping[["South"]] ~ "South",
+    State %in% region_mapping[["West"]] ~ "West",
+    TRUE ~ "Other"
+  ))
+
+# Update the reasons with descriptions
+bar_data <- airport_cancel_data %>%
+  mutate(reason_label = case_when(
+    most_frequent_reason == "A" ~ "Carrier",
+    most_frequent_reason == "B" ~ "Weather",
+    most_frequent_reason == "C" ~ "National Air System",
+    most_frequent_reason == "D" ~ "Security"
+  )) %>%
+  group_by(reason_label, region) %>%
+  summarise(total_cancellations = sum(number_of_cancelations), .groups = "drop")
+
+# Define consistent color mapping
+color_mapping <- c(
+  "Carrier" = "#E41A1C",
+  "Weather" = "#377EB8",
+  "National Air System" = "#4DAF4A",
+  "Security" = "#984EA3"
+)
+# Calculate total cancellations per reason
+totals <- bar_data %>%
+  group_by(reason_label) %>%
+  summarise(total_cancellations = sum(total_cancellations), .groups = "drop")
+
+# Bar plot with total labels
+bar_plot1 <- ggplot(bar_data, aes(x = reason_label, y = total_cancellations, fill = region)) +
+  # Stacked bar plot
+  geom_bar(stat = "identity", position = "stack", width = 0.7) +
+  
+  # Add total labels at the top of each bar
+  geom_text(data = totals, aes(x = reason_label, y = total_cancellations, label = total_cancellations),
+            inherit.aes = FALSE, position = position_stack(vjust = 1.05), color = "black", size = 4) +
+  
+  # Define color palette for regions
+  scale_fill_manual(values = c(
+    "Northeast" = "#B3CDE3",
+    "Midwest" = "#FBB4AE",
+    "South" = "#CCEBC5",
+    "West" = "#DECBE4",
+    "Other" = "#FED9A6"
+  )) +
+  
+  # Labels and theme
+  labs(
+    title = "Plot 3: Total Cancellations by Reason and Region",
+    subtitle = "Categorized by cancellation reasons and regions",
+    x = "Cancellation Reason",
+    y = "Total Cancellations",
+    fill = "Region"
+  ) +
+  theme_classic() 
+
+
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+print(map_plot)
+print(bar_plot1)
+```
+
+```{r, include=FALSE }
+ggsave(filename = "cancellationsbyregion.png", 
+       plot = bar_plot1, 
+       path = "/Users/vikali/Desktop/sqlclass/Assignment/Miniproject", 
+       scale = 1, 
+       dpi = 300)
+```
+
+```{r, include=FALSE}
+ggsave(filename = "cancellationsmap.png", 
+       plot = map_plot, 
+       path = "/Users/vikali/Desktop/sqlclass/Assignment/Miniproject", 
+       scale = 1, 
+       dpi = 300)
+```
+
+This section analyzes flight cancellations across the United States based on the most frequent cancellation reason at each airport. The analysis aggregates the top cancellation reasons per airport and examines their regional distribution.
+
+Plot 2 visualizes the most frequent reasons for flight cancellations at airports across the United States, grouped into four reasons: Carrier-related, Weather-related, National Air System, and Security. Carrier-related reasons spread across the country, and Security-related cancellations are centered on the South and East. Counterintuitively, weather doesn't appear as a big issue in the plot, likely due to the dataset’s focus on the summer month, a period with fewer weather disruptions compared to winter.
+
+Plot 3 illustrates the total counts of each cancellation, colored by region. Carrier-related issues account for the majority of cancellations, totaling 972 incidents across all regions. These issues are most pronounced in the South and Midwest, which could possibly imply operational inefficiencies or staffing shortage. Security, ranked second with 757 incidents, highlights the need to continuously strengthen security protections at key airports. The National Air System reason is negligible. Weather disproportionately affects west and south, indicating regional vulnerability to geographic and seasonal factors.
+
+Airlines should prioritize improving resource allocation, staffing, and scheduling to reduce cancellations caused by carrier inefficiencies. And airlines should work together with airports in the West and South to prepare various weather situations and contingency plans.
+
+## **Flight Trend**
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Plot the busy day average of flights
+busy_day <- busy_day %>%
+  mutate(
+    DayOfWeek = factor(DayOfWeek, levels = 1:7, labels = c(
+      "Mondays", "Tuesdays", "Wednesdays", "Thursdays", "Fridays", "Saturdays", "Sundays"
+    ))
+  )
+
+busy_days_plot <- ggplot(busy_day, aes(x = DayOfWeek, y = number_of_flights, group = 1)) +
+  geom_line(color = "#B3CDE3", size = 1.5) +
+  geom_point(color = "#B3CDE3", size = 2, shape=21, fill='white') +
+  labs(
+    title = "Plot 4: Busy Days by Day of the Week",
+    subtitle = "Total Number of Flights for Each Day in July",
+    x = "Day of the Week",
+    y = "Number of Flights"
+  ) +
+  theme_classic() +
+  geom_text(aes(label = number_of_flights), 
+            nudge_x = -0.2, nudge_y = 2000, color = "#4DAF4A", fontface='bold',size = 4) +
+  theme(
+    plot.title = element_text(size = 14, face = "bold"),
+    plot.subtitle = element_text(size = 12),
+    axis.title.x = element_text(size = 12),
+    axis.title.y = element_text(size = 12),
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )+
+  scale_y_continuous(expand = expansion(mult = c(0.1, 0.2)))
+
+# Display the plot
+print(busy_days_plot)
+
+```
+
+```{r, include=FALSE}
+ggsave(filename = "busydayofweek.png", 
+       plot = busy_days_plot, 
+       path = "/Users/vikali/Desktop/sqlclass/Assignment/Miniproject", 
+       scale = 1, 
+       dpi = 300)
+```
+
+This section analyzes the total number of flights for each day of the week in July 2020 to identify patterns of flight activity. Plot 4 highlights changes in flight traffic on different days, revealing the busiest and least busy days for air travel. Friday presents to be the busiest day in July 2020, with 59737 number of flights in total, closely followed by Thursday with 59555 number of flights. The busy traffic on Thursdays and Fridays indicate that passengers travel a lot to prepare themselves for the weekend. Tuesday and Saturday are the least busiest days of the week, with volumes of 42552 and 43322 respectively. Flight numbers grow sharply from Tuesday to Wednesday to Thursday, suggesting a high demand on air travel in the mid-week.
+
+In order to coordinate busy midweek traffic, airlines should increase staffing and resources on those days to ensure smooth operation of high demand. Airlines could also offer discounted tickets on less busy days to counterbalance the difference in demand during the week.
+
+## **Conclusion**
+
+This report provides a comprehensive evaluation of key performance metrics for the U.S. aviation industry in July 2020, focusing on departure delays, flight cancellations, and weekly flight trends.
+
+The analysis reveals significant disparities in punctuality among airlines, with notable outliers such as American Airlines and American Eagle Airlines experiencing extreme delays. Addressing these outliers through targeted interventions could significantly enhance overall airline performance and customer satisfaction.
+
+Cancellation analysis identifies carrier-related issues as the leading cause, emphasizing the need for airlines to improve operational efficiency and resource allocation. Additionally, weather-related cancellations highlight the importance of regional preparedness and contingency planning.
+
+Flight trends suggest a surge in demand during midweek and weekends, particularly on Thursdays and Fridays. Airlines should optimize staffing and resources to accommodate high-demand days while exploring strategies such as discounts on less busy days to balance demand.
+
+By implementing these data-driven recommendations, airlines and airports can enhance operational efficiency, reduce disruptions, and elevate passenger experience.
+
+```{r, include=FALSE}
+airline_airport_delay <-airline_airport_delay %>%
+  left_join(airport_cancel_data,by='airport_name') %>%
+  select(airline,airport_name,average_delay,region)
+
+airline_airport_delay <- airline_airport_delay %>%
+  mutate(region = case_when(
+    row_number() == 6 ~ "South",       # Row 6
+    row_number() == 8 ~ "Northeast",  # Row 8
+    row_number() == 10 ~ "Midwest",   # Row 10
+    row_number() == 11 ~ "Northeast", # Row 11
+    TRUE ~ region                     # Keep existing regions for other rows
+  ))
+```
+
+```{r, include=FALSE}
+library(ggalluvial)
+library(ggalluvial)
+library(dplyr)
+
+# Reorder factors for better flow
+airline_airport_delay <- airline_airport_delay %>%
+  mutate(
+    region = factor(region, levels = c("Northeast", "Midwest", "South", "West")),
+    airport_name = reorder(airport_name, -average_delay),
+    airline = reorder(airline, -average_delay)
+  )
+```
+
+```{r, include=FALSE}
+
+library(ggplot2)
+library(RColorBrewer)
+library(ggalt)
+
+# Dot plot for average delays
+dot_plot <- ggplot(airline_airport_delay, aes(x = reorder(airport_name, average_delay), y = average_delay, color = airline)) +
+  geom_point(size = 4, alpha = 0.8) +  
+  scale_color_manual(
+    values = colorRampPalette(brewer.pal(12, "Set3"))(length(unique(airline_airport_delay$airline))),
+    name = "Airline"
+  ) +
+  labs(
+    title = "Average Delays by Airport and Airline",
+    x = "Airport",
+    y = "Average Delay (minutes)"
+  ) +
+  theme_classic() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.title = element_text(size = 16, face = "bold"),
+    plot.subtitle = element_text(size = 12, face = "italic"),
+    legend.position = "right",
+    legend.text = element_text(size = 10)
+  ) +
+  # circle top delays
+  geom_encircle(
+    data = airline_airport_delay %>% arrange(desc(average_delay)) %>% head(3),
+    aes(x = reorder(airport_name, average_delay), y = average_delay),
+    color = "#E41A1C", size = 1, expand = 0.001, alpha = 0.5
+  ) + 
+  # Extend y-axis for better spacing
+  scale_y_continuous(
+    limits = c(0, max(airline_airport_delay$average_delay) + 50),  # Add padding above
+    expand = expansion(mult = c(0.1, 0.05))  # Add space below and above points
+  )
+dot_plot
+```
+
+```{r, include=FALSE}
+ggsave(filename = "AirportAirlineDelay.png", 
+       plot = dot_plot, 
+       path = "/Users/vikali/Desktop/sqlclass/Assignment/Miniproject", 
+       scale = 1, 
+       dpi = 300)
+```
