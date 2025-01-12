@@ -12,3 +12,9 @@ Discover insights into air travel delays and airline performance. This project a
 This data science project uses Reddit discussion data to analyze users’ attitudes and perceptions toward anti-obesity medications for weight management. A range of data techniques is applied, and policy implications are explored to identify gaps between users' needs and current healthcare offerings.
 
 - [Watch the Full Video and Read More](ds3_showcase_Vika.qmd)
+
+## Assessing obesity levels through an analysis of dietary patterns and physical well-being in developing countries
+This research aims to explore the specific reasons behind the rise in obesity in Latin American countries and whether drivers, including genetics, dietary choices, and physical inactivity, differ significantly from those observed in developed countries. Understanding these nuances is crucial for developing targeted interventions that address the unique challenges faced by populations in developing nations.
+
+- [Read the Full Report (PDF)](obesity in developing countries.pdf){target="_blank"}
+

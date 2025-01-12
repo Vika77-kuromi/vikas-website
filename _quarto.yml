@@ -21,7 +21,8 @@ website:
       contents:
         - DS/HW4.qmd
         - DS/ds3_showcase_Vika.mp4
-        - DS/
+        - DS/ds3_showcase_Vika.qmd
+        - DS/obesity in developing countries.pdf
 
 format:
   html: 
