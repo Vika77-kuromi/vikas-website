@@ -1,0 +1,159 @@
+[
+  {
+    "objectID": "ws/writing.html",
+    "href": "ws/writing.html",
+    "title": "Writing",
+    "section": "",
+    "text": "Welcome to My Writing Collection! Writing is a powerful way to explore ideas and communicate insights. My work spans diverse topics, with a special focus on healthcare, policy, and technology. Feel free to browse the pieces below to delve deeper into the subjects that inspire me.\n\n\nA policy memo addressing the high costs of cancer drugs in the United States. It compares strategies used in the US and European countries, focusing on the potential for promoting generic drugs and government intervention in drug pricing.\n\nRead the Full Report (PDF)\n\n\n\n\nThis memo examines the privacy risks associated with integrating AI in healthcare, including sensitive patient data governance. It advocates for enhancing governance structures and increasing patient awareness to safeguard personal health information.\n\nRead the Full Report (PDF)\n\n\n\n\nThis essay explores the rise of autonomous AI-controlled drones in military warfare. It examines their potential to lower civilian casualties through precise targeting, but also delves into ethical concerns regarding accountability, transparency, and their misuse.\n\nRead the Full Report (PDF)"
+  },
+  {
+    "objectID": "ws/writing.html#high-costs-of-cancer-drugs-in-the-us",
+    "href": "ws/writing.html#high-costs-of-cancer-drugs-in-the-us",
+    "title": "Writing",
+    "section": "",
+    "text": "A policy memo addressing the high costs of cancer drugs in the United States. It compares strategies used in the US and European countries, focusing on the potential for promoting generic drugs and government intervention in drug pricing.\n\nRead the Full Report (PDF)"
+  },
+  {
+    "objectID": "ws/writing.html#privacy-issues-in-ai-healthcare",
+    "href": "ws/writing.html#privacy-issues-in-ai-healthcare",
+    "title": "Writing",
+    "section": "",
+    "text": "This memo examines the privacy risks associated with integrating AI in healthcare, including sensitive patient data governance. It advocates for enhancing governance structures and increasing patient awareness to safeguard personal health information.\n\nRead the Full Report (PDF)"
+  },
+  {
+    "objectID": "ws/writing.html#artificial-intelligence-controlled-military-drones",
+    "href": "ws/writing.html#artificial-intelligence-controlled-military-drones",
+    "title": "Writing",
+    "section": "",
+    "text": "This essay explores the rise of autonomous AI-controlled drones in military warfare. It examines their potential to lower civilian casualties through precise targeting, but also delves into ethical concerns regarding accountability, transparency, and their misuse.\n\nRead the Full Report (PDF)"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Vika’s Personal Website",
+    "section": "",
+    "text": "Hi, welcome to Vika’s personal page! I’m currently pursuing a Master’s degree in Data Science for Public Policy at Georgetown University and actively seeking a full-time position in the United States starting June 2025.\nBefore graduate school, I earned my bachelor’s degree in Psychology and Education from New York University and gained 1.5 years of experience as a research assistant in a developmental psychology program. My passion for life sciences and the healthcare industry has shaped my academic and professional journey.\nThroughout my graduate studies, I’ve focused on health policy and the application of machine learning techniques in disease diagnosis. Currently, I serve as a Policy Analyst, Data Analyst, and Website Manager at the Healthcare Financing Initiative at Georgetown University. Additionally, I’ve gained industry experience through internships at Siemens Healthineers, various startups as a Marketing and Product Intern, and soon, I’ll be joining the Government Affairs Team at Elanco’s DC office.\nPlease explore the different sections of my website to learn more about my work. In my free time, I enjoy reading, cooking, and video editing."
+  },
+  {
+    "objectID": "DS/HW4.html",
+    "href": "DS/HW4.html",
+    "title": "Passenger Air Travel On-time Insight Report",
+    "section": "",
+    "text": "Air travel has revolutionized transportation, enabling people to traverse vast distances with unprecedented speed and efficiency. In just a few hours, travelers can move from the bustling streets of New York City to sunny Los Angeles, fostering global connectivity and economic integration. However, air travel is not always as pleasant as it expects to be. Delays, cancellations, and even plane crashes all happen by some chances, causing schedule disruptives for travelers and reduced airline performances.\nTherefore, in this report, using selected data from the Bureau of Transportation Statistics, I aim to examine key metrics in assessing the dynamics of aviation industry, focusing on:\n\nEarly and Delay Departure: Analyzing the max delays and early departure times for each airline.\nCancellation: Looking into key reasons for flight cancellations in most airports in the US.\nFlight Trends: Assessing total flight volumes by day of the week in July 2020.",
+    "crumbs": [
+      "Passenger Air Travel On-Time Report"
+    ]
+  },
+  {
+    "objectID": "DS/HW4.html#introduction",
+    "href": "DS/HW4.html#introduction",
+    "title": "Passenger Air Travel On-time Insight Report",
+    "section": "",
+    "text": "Air travel has revolutionized transportation, enabling people to traverse vast distances with unprecedented speed and efficiency. In just a few hours, travelers can move from the bustling streets of New York City to sunny Los Angeles, fostering global connectivity and economic integration. However, air travel is not always as pleasant as it expects to be. Delays, cancellations, and even plane crashes all happen by some chances, causing schedule disruptives for travelers and reduced airline performances.\nTherefore, in this report, using selected data from the Bureau of Transportation Statistics, I aim to examine key metrics in assessing the dynamics of aviation industry, focusing on:\n\nEarly and Delay Departure: Analyzing the max delays and early departure times for each airline.\nCancellation: Looking into key reasons for flight cancellations in most airports in the US.\nFlight Trends: Assessing total flight volumes by day of the week in July 2020.",
+    "crumbs": [
+      "Passenger Air Travel On-Time Report"
+    ]
+  },
+  {
+    "objectID": "DS/HW4.html#data-description-and-method",
+    "href": "DS/HW4.html#data-description-and-method",
+    "title": "Passenger Air Travel On-time Insight Report",
+    "section": "Data Description and Method",
+    "text": "Data Description and Method\nThe dataset used in the analysis is retrieved from the Reporting Carrier On-Time Performance datafile under the passenger travel subject from the Bureau of Transportation website. July 2020 is being selected as the focusing month of the analysis. With 352888 rows of data, the dataset contains detailed information across the following categories:\n\nTime Information: Year, quarter, month, day of month, day of week, flight date.\nAirline Information: Airline carrier code, airline US DOT code, airline IATA code, tail number, flight number.\nOrigin Airport Information: Origin airport ID, origin airport name, origin airport city name, origin airport state code,and other details.\nDestination Airport Information: Destination airport ID, destination airport name, destination airport city name, destination airport state code, and other details.\nDeparture Performance Information: Planned departure time, actual departure time, differences in planned and actual departure time, departure delay indicator, and other details.\nArrival Performance Information: Planned arrival time, actual arrival time, differences in planned and actual arrival time, and other details.\nCancellation Information: Cancelled flight indicator, cancellation code.\n\nAirline information, departure performance, and cancellations are the key metrics in assessing the performance of airlines. The dataset is imported to MySQL for data grouping, querying, and filtering to enable efficient analysis. Subsequently, R is used for data visualizations, employing techniques such as geospatial mapping and descriptive plots.",
+    "crumbs": [
+      "Passenger Air Travel On-Time Report"
+    ]
+  },
+  {
+    "objectID": "DS/HW4.html#early-and-delay-departure",
+    "href": "DS/HW4.html#early-and-delay-departure",
+    "title": "Passenger Air Travel On-time Insight Report",
+    "section": "Early and Delay Departure",
+    "text": "Early and Delay Departure\n\n\n\n\n\n\n\n\n\nPlot 1 illustrates the maximum early and late departure delays for 17 airlines, with late departures represented in green and early departures in red. The plot highlights notable disparities regarding punctuality on airline performance.\nThere are two outliers, American Airlines(AA) and American Eagle Airlines (MQ). AA exhibits the worst performance on late departures, with a maximum delay of 3890 minutes, and also shows the one of the highest early departures, reaching 60 minutes. MQ ranks second on the chart with the maximum late departure of 2248 minutes. For the remaining of the 15 airlines, they are well within the 500 to 1500 minute range for late departures and have negligible early departures. Hawaii Airlines (HA) is the best airline in terms of punctuality. \nAirlines with extreme delay instances should investigate the root causes. Addressing outliers can significantly improve the overall airline performance and customer satisfactions. While plot 1 yields actionable insights, the analysis could be largely complemented by examining average early and delayed departures by minutes for each airline, which may offer a more comprehensive picture of the on-time performance.",
+    "crumbs": [
+      "Passenger Air Travel On-Time Report"
+    ]
+  },
+  {
+    "objectID": "DS/HW4.html#cancellation-by-reasons-and-regions",
+    "href": "DS/HW4.html#cancellation-by-reasons-and-regions",
+    "title": "Passenger Air Travel On-time Insight Report",
+    "section": "Cancellation by Reasons and Regions",
+    "text": "Cancellation by Reasons and Regions\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThis section analyzes flight cancellations across the United States based on the most frequent cancellation reason at each airport. The analysis aggregates the top cancellation reasons per airport and examines their regional distribution.\nPlot 2 visualizes the most frequent reasons for flight cancellations at airports across the United States, grouped into four reasons: Carrier-related, Weather-related, National Air System, and Security. Carrier-related reasons spread across the country, and Security-related cancellations are centered on the South and East. Counterintuitively, weather doesn’t appear as a big issue in the plot, likely due to the dataset’s focus on the summer month, a period with fewer weather disruptions compared to winter.\nPlot 3 illustrates the total counts of each cancellation, colored by region. Carrier-related issues account for the majority of cancellations, totaling 972 incidents across all regions. These issues are most pronounced in the South and Midwest, which could possibly imply operational inefficiencies or staffing shortage. Security, ranked second with 757 incidents, highlights the need to continuously strengthen security protections at key airports. The National Air System reason is negligible. Weather disproportionately affects west and south, indicating regional vulnerability to geographic and seasonal factors.\nAirlines should prioritize improving resource allocation, staffing, and scheduling to reduce cancellations caused by carrier inefficiencies. And airlines should work together with airports in the West and South to prepare various weather situations and contingency plans.",
+    "crumbs": [
+      "Passenger Air Travel On-Time Report"
+    ]
+  },
+  {
+    "objectID": "DS/HW4.html#flight-trend",
+    "href": "DS/HW4.html#flight-trend",
+    "title": "Passenger Air Travel On-time Insight Report",
+    "section": "Flight Trend",
+    "text": "Flight Trend\n\n\n\n\n\n\n\n\n\nThis section analyzes the total number of flights for each day of the week in July 2020 to identify patterns of flight activity. Plot 4 highlights changes in flight traffic on different days, revealing the busiest and least busy days for air travel. Friday presents to be the busiest day in July 2020, with 59737 number of flights in total, closely followed by Thursday with 59555 number of flights. The busy traffic on Thursdays and Fridays indicate that passengers travel a lot to prepare themselves for the weekend. Tuesday and Saturday are the least busiest days of the week, with volumes of 42552 and 43322 respectively. Flight numbers grow sharply from Tuesday to Wednesday to Thursday, suggesting a high demand on air travel in the mid-week.\nIn order to coordinate busy midweek traffic, airlines should increase staffing and resources on those days to ensure smooth operation of high demand. Airlines could also offer discounted tickets on less busy days to counterbalance the difference in demand during the week.",
+    "crumbs": [
+      "Passenger Air Travel On-Time Report"
+    ]
+  },
+  {
+    "objectID": "DS/HW4.html#conclusion",
+    "href": "DS/HW4.html#conclusion",
+    "title": "Passenger Air Travel On-time Insight Report",
+    "section": "Conclusion",
+    "text": "Conclusion\nThis report provides a comprehensive evaluation of key performance metrics for the U.S. aviation industry in July 2020, focusing on departure delays, flight cancellations, and weekly flight trends.\nThe analysis reveals significant disparities in punctuality among airlines, with notable outliers such as American Airlines and American Eagle Airlines experiencing extreme delays. Addressing these outliers through targeted interventions could significantly enhance overall airline performance and customer satisfaction.\nCancellation analysis identifies carrier-related issues as the leading cause, emphasizing the need for airlines to improve operational efficiency and resource allocation. Additionally, weather-related cancellations highlight the importance of regional preparedness and contingency planning.\nFlight trends suggest a surge in demand during midweek and weekends, particularly on Thursdays and Fridays. Airlines should optimize staffing and resources to accommodate high-demand days while exploring strategies such as discounts on less busy days to balance demand.\nBy implementing these data-driven recommendations, airlines and airports can enhance operational efficiency, reduce disruptions, and elevate passenger experience.",
+    "crumbs": [
+      "Passenger Air Travel On-Time Report"
+    ]
+  },
+  {
+    "objectID": "HomePage/index.html",
+    "href": "HomePage/index.html",
+    "title": "Vika’s Personal Website",
+    "section": "",
+    "text": "Hi, welcome to Vika’s personal page! I’m currently pursuing a Master’s degree in Data Science for Public Policy at Georgetown University and actively seeking a full-time position in the United States starting June 2025.\nBefore graduate school, I earned my bachelor’s degree in Psychology and Education from New York University and gained 1.5 years of experience as a research assistant in a developmental psychology program. My passion for life sciences and the healthcare industry has shaped my academic and professional journey.\nThroughout my graduate studies, I’ve focused on health policy and the application of machine learning techniques in disease diagnosis. Currently, I serve as a Policy Analyst, Data Analyst, and Website Manager at the Healthcare Financing Initiative at Georgetown University. Additionally, I’ve gained industry experience through internships at Siemens Healthineers, various startups as a Marketing and Product Intern, and soon, I’ll be joining the Government Affairs Team at Elanco’s DC office.\nPlease explore the different sections of my website to learn more about my work. In my free time, I enjoy reading, cooking, and video editing."
+  },
+  {
+    "objectID": "DS/DataScience.html",
+    "href": "DS/DataScience.html",
+    "title": "Data Science Projects",
+    "section": "",
+    "text": "Welcome to my Data Science Projects showroom! I’m passionate about the magic of coding and uncovering hidden patterns within data. Many of my projects focus on healthcare, particularly at the intersection of policy and technology. Feel free to explore the links below to learn more about my work.\n\n\nDiscover insights into air travel delays and airline performance. This project analyzes on-time performance metrics to uncover key trends in the aviation industry.\n\nRead the Full Report\n\n\n\n\nThis data science project uses Reddit discussion data to analyze users’ attitudes and perceptions toward anti-obesity medications for weight management. A range of data techniques is applied, and policy implications are explored to identify gaps between users’ needs and current healthcare offerings.\n\nWatch the Full Video and Read More\n\n\n\n\nThis research aims to explore the specific reasons behind the rise in obesity in Latin American countries and whether drivers, including genetics, dietary choices, and physical inactivity, differ significantly from those observed in developed countries. Understanding these nuances is crucial for developing targeted interventions that address the unique challenges faced by populations in developing nations.\n\nRead the Full Report (PDF)"
+  },
+  {
+    "objectID": "DS/DataScience.html#passenger-air-travel-on-time-report",
+    "href": "DS/DataScience.html#passenger-air-travel-on-time-report",
+    "title": "Data Science Projects",
+    "section": "",
+    "text": "Discover insights into air travel delays and airline performance. This project analyzes on-time performance metrics to uncover key trends in the aviation industry.\n\nRead the Full Report"
+  },
+  {
+    "objectID": "DS/DataScience.html#reddit-users-attitudes-on-anti-obesity-drugs-and-potential-access-issues",
+    "href": "DS/DataScience.html#reddit-users-attitudes-on-anti-obesity-drugs-and-potential-access-issues",
+    "title": "Data Science Projects",
+    "section": "",
+    "text": "This data science project uses Reddit discussion data to analyze users’ attitudes and perceptions toward anti-obesity medications for weight management. A range of data techniques is applied, and policy implications are explored to identify gaps between users’ needs and current healthcare offerings.\n\nWatch the Full Video and Read More"
+  },
+  {
+    "objectID": "DS/DataScience.html#assessing-obesity-levels-through-an-analysis-of-dietary-patterns-and-physical-well-being-in-developing-countries",
+    "href": "DS/DataScience.html#assessing-obesity-levels-through-an-analysis-of-dietary-patterns-and-physical-well-being-in-developing-countries",
+    "title": "Data Science Projects",
+    "section": "",
+    "text": "This research aims to explore the specific reasons behind the rise in obesity in Latin American countries and whether drivers, including genetics, dietary choices, and physical inactivity, differ significantly from those observed in developed countries. Understanding these nuances is crucial for developing targeted interventions that address the unique challenges faced by populations in developing nations.\n\nRead the Full Report (PDF)"
+  },
+  {
+    "objectID": "DS/ds3_showcase_Vika.html",
+    "href": "DS/ds3_showcase_Vika.html",
+    "title": "Reddit Users’ Attitudes on Anti-Obesity Drugs",
+    "section": "",
+    "text": "Summary:\nThis data science project uses Reddit discussion data to analyze users’ attitudes and perceptions toward anti-obesity medications for weight management. A range of data techniques is applied, and policy implications are explored to identify gaps between users’ needs and current healthcare offerings.\n\n\nData Source:\nThis study uses Reddit data to assess users’ attitudes toward anti-obesity drugs and the challenges they encounter, such as high costs, limited access, and insurance issues. Data is collected via the Reddit API from 21 popular subreddits related to health and weight management, including loseit, obesity, AskDocs, nutrition, PCOS, diabetes, and fitness, among others. Queries include keywords such as “weight loss,” “health,” “Medicare,” and specific anti-obesity drugs, like Semaglutide.\nFor each subreddit, I query these keywords to extract relevant discussions. The results are stored in a data frame containing post titles, main text, comment counts, upvote/downvote scores, URL links, all comments, and subreddit names. To ensure diversity, I set a limit of 200 posts per query, although some subreddits do not reach this cap. In total, 3,800 posts and their associated comments are collected.\nAfter removing duplicates and null values, the dataset contains 1,543 entries. On average, each post has 184 comments (standard deviation: 242) and a score of 788 (standard deviation: 1,753), indicating significant variance in engagement levels. Outliers, calculated based on the Interquartile Range (IQR), are removed for better consistency.\nSince my research focuses on individual perspectives, I apply the expand function to the comment column, allowing each comment to form its own row. After this transformation, the dataset contains 26,014 rows.\n\n\nVideo:\n\n\nYour browser does not support the video tag. You can download the video instead. \n\n\nFindings and Limitations:\nIn summary, users exhibit a generally positive attitude across the dataset, but sentiments vary significantly across topic clusters and entities. Government healthcare programs like Medicare and Medicaid are viewed favorably, which suggests an opportunity for policymakers to expand coverage to include weight-loss drugs, a measure already proposed by the Biden administration. Under current Medicare Part D regulations, individuals with pre-existing conditions like diabetes can access these medications, but obese individuals must often wait until a serious health condition develops to qualify for coverage. This delay not only harms patients but also increases long-term costs for insurance companies, as treating more severe health conditions, often exacerbated by obesity, becomes significantly more expensive. Moreover, some studies suggest that pressure on Medicare and Medicaid to cover anti-obesity drugs could encourage private insurance companies to assume greater responsibility for similar coverage.\nOne limitation is that TF-IDF prioritizes term importance based on frequency and uniqueness but does not capture relationships between terms. In contrast, association rule mining focuses on co-occurrences, which may underrepresent standalone frequent terms like “insurance”. This gap limits a comprehensive understanding of term significance. As a next step, introducing bigrams and trigrams could help uncover more meaningful patterns and relationships between terms.\nReddit discussions may not fully represent broader populations due to self-selection bias and the platform’s demographics. Additionally, discussions about insurance and healthcare costs might be underreported due to their sensitivity. To address this issue, scraping data from other parts of the Internet and incorporating multiple social platforms for data collection could provide a broader and more balanced dataset.",
+    "crumbs": [
+      "Reddit Users’ Attitudes on Anti-Obesity Drugs"
+    ]
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  }
+]
